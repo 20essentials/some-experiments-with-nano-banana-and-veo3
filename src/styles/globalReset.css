@@ -1,9 +1,9 @@
 :root {
-  --gradient: linear-gradient(to bottom, #00f, transparent);
+  --gradient: linear-gradient(to bottom, yellow, lime);
 }
 
 body {
-  --sb-track-color: #000;
+  --sb-track-color: black;
   --sb-thumb-color: var(--gradient);
   --sb-size: 0.7vmax;
   min-height: 100vh;
@@ -11,6 +11,7 @@ body {
   width: 100%;
   overflow-x: hidden;
   display: flex;
+  flex-direction: column;
   /*  background-image: url('/assets/background.svg');
   background-size: contain; */
 }

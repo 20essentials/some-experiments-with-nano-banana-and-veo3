@@ -3,6 +3,9 @@ import Link from 'next/link';
 export function Hero() {
   return (
     <section className='relative w-full h-screen flex flex-wrap place-content-center'>
+      <h2 className=' absolute top-[1.5vmax] right-[1.5vmax] text-white/80 font-bold'>
+        Just Click!
+      </h2>
       <img
         src='/assets/title.webp'
         alt='Am Title'
