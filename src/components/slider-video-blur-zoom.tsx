@@ -1,4 +1,5 @@
 'use client';
+//@ts-nocheck
 import dynamic from 'next/dynamic';
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
@@ -10,23 +11,21 @@ import {
   TextureLoader,
   Vector2
 } from '@/lib/three.module.js';
-const CANVAS_ID = 'SDF32424234'
+const CANVAS_ID = 'SDF32424234';
 // } from 'https://unpkg.com/three@0.120.0/build/three.module.js';
 
 import useThree from '@/lib/useThree.js';
+import { arrayImages, arrayVideos } from '@/lib/const';
+
+const arrayVideos_ = arrayVideos;
+//{ src: '...'}[]
 
 export function SliderVideoBlurZoom_() {
   useEffect(() => {
     App();
 
     function App() {
-      const images = [
-        { src: 'https://assets.codepen.io/33787/img10.jpg' },
-        { src: 'https://assets.codepen.io/33787/img8.jpg' },
-        { src: 'https://assets.codepen.io/33787/img1.jpg' },
-        { src: 'https://assets.codepen.io/33787/img2.jpg' },
-        { src: 'https://assets.codepen.io/33787/img4.jpg' }
-      ];
+      const images = arrayImages;
 
       let three, scene;
       let image1, image2;
@@ -127,13 +126,13 @@ export function SliderVideoBlurZoom_() {
         const pdiff = progress1 - progress;
         if (pdiff === 0) return;
 
-        const p0 = progress % 1;
-        const p1 = progress1 % 1;
-        if ((pdiff > 0 && p1 < p0) || (pdiff < 0 && p0 < p1)) {
-          const i = Math.floor(progress1) % images.length;
-          const j = (i + 1) % images.length;
-          image1.setMap(images[i].texture);
-          image2.setMap(images[j].texture);
+        const currentIndex = Math.floor(progress1) % images.length;
+        const nextIndex = (currentIndex + 1) % images.length;
+
+        // Solo actualizamos si el índice entero cambió
+        if (Math.floor(progress) % images.length !== currentIndex) {
+          image1.setMap(images[currentIndex].texture);
+          image2.setMap(images[nextIndex].texture);
         }
 
         progress = progress1;
@@ -290,7 +289,11 @@ export function SliderVideoBlurZoom_() {
 
   const canvasRef = useRef(null);
   return (
-    <canvas id={CANVAS_ID} ref={canvasRef} className='w-full h-screen block z-10' />
+    <canvas
+      id={CANVAS_ID}
+      ref={canvasRef}
+      className='w-full h-screen block z-10'
+    />
   );
 }
 

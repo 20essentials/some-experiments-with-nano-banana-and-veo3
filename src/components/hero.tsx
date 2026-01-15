@@ -3,7 +3,7 @@ import Link from 'next/link';
 export function Hero() {
   return (
     <section className='relative w-full h-screen flex flex-wrap place-content-center'>
-      <h2 className=' absolute top-[1.5vmax] right-[1.5vmax] text-white/80 font-bold'>
+      <h2 className=' absolute top-[1.5vmax] right-[1.5vmax] text-white/80 font-bold text-[1.5vmax]'>
         Just Click!
       </h2>
       <img

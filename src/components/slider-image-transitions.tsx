@@ -31,7 +31,7 @@ export function SliderImageTransitions_() {
     function App() {
       const conf = {
         size: arrayImages.length,
-        images: arrayImages
+        images: arrayImages.toSorted(() => Math.random() - 0.5)
       };
 
       let renderer, scene, camera, cameraCtrl;
@@ -165,23 +165,23 @@ export function SliderImageTransitions_() {
         targetProgress = limit(targetProgress, 0, conf.images.length - 1);
       }
 
-     function updateProgress() {
-  const progress1 = lerp(progress, targetProgress, 0.1);
-  const pdiff = progress1 - progress;
-  if (pdiff === 0) return;
+      function updateProgress() {
+        const progress1 = lerp(progress, targetProgress, 0.1);
+        const pdiff = progress1 - progress;
+        if (pdiff === 0) return;
 
-  const currentIndex = Math.floor(progress1);
-  const nextIndex = Math.min(currentIndex + 1, textures.length - 1);
+        const currentIndex = Math.floor(progress1);
+        const nextIndex = Math.min(currentIndex + 1, textures.length - 1);
 
-  // Actualiza solo si hay un cambio de índice
-  if (Math.floor(progress) !== currentIndex) {
-    plane1.setTexture(textures[currentIndex]);
-    plane2.setTexture(textures[nextIndex]);
-  }
+        // Actualiza solo si hay un cambio de índice
+        if (Math.floor(progress) !== currentIndex) {
+          plane1.setTexture(textures[currentIndex]);
+          plane2.setTexture(textures[nextIndex]);
+        }
 
-  progress = progress1;
-  setPlanesProgress(progress % 1);
-}
+        progress = progress1;
+        setPlanesProgress(progress % 1);
+      }
 
       function setPlanesProgress(progress) {
         plane1.uProgress.value = progress;
