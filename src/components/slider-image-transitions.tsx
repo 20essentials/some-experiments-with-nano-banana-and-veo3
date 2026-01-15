@@ -165,22 +165,23 @@ export function SliderImageTransitions_() {
         targetProgress = limit(targetProgress, 0, conf.images.length - 1);
       }
 
-      function updateProgress() {
-        const progress1 = lerp(progress, targetProgress, 0.1);
-        const pdiff = progress1 - progress;
-        if (pdiff === 0) return;
+     function updateProgress() {
+  const progress1 = lerp(progress, targetProgress, 0.1);
+  const pdiff = progress1 - progress;
+  if (pdiff === 0) return;
 
-        const p0 = progress % 1;
-        const p1 = progress1 % 1;
-        if ((pdiff > 0 && p1 < p0) || (pdiff < 0 && p0 < p1)) {
-          const i = Math.floor(progress1);
-          plane1.setTexture(textures[i]);
-          plane2.setTexture(textures[i + 1]);
-        }
+  const currentIndex = Math.floor(progress1);
+  const nextIndex = Math.min(currentIndex + 1, textures.length - 1);
 
-        progress = progress1;
-        setPlanesProgress(progress % 1);
-      }
+  // Actualiza solo si hay un cambio de índice
+  if (Math.floor(progress) !== currentIndex) {
+    plane1.setTexture(textures[currentIndex]);
+    plane2.setTexture(textures[nextIndex]);
+  }
+
+  progress = progress1;
+  setPlanesProgress(progress % 1);
+}
 
       function setPlanesProgress(progress) {
         plane1.uProgress.value = progress;
