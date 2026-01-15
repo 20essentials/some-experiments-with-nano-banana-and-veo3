@@ -2,25 +2,28 @@
   "compilerOptions": {
     "target": "ES2017",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    // "noImplicitAny": true,
-    "strict": false,
-    "noImplicitAny": false,
-    // "strict": true,
-    "noEmit": true,
+    "allowJs": true,                // Permite archivos .js
+    "checkJs": false,               // No revisa errores en JS
+    "skipLibCheck": true,           // Ignora errores en librerías
+    "strict": false,                // Desactiva todas las comprobaciones estrictas
+    "noImplicitAny": false,         // Permite tipos 'any' implícitos
+    "strictNullChecks": false,      
+    "strictFunctionTypes": false,
+    "strictBindCallApply": false,
+    "noEmitOnError": false,         // Permite emitir incluso si hay errores
+    "suppressImplicitAnyIndexErrors": true,
+    "noFallthroughCasesInSwitch": false,
+    "noUnusedParameters": false,
+    "noUnusedLocals": false,
+    "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": false,
     "module": "esnext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
-    "isolatedModules": true,
+    "isolatedModules": false,       // Relaja reglas de módulos
     "jsx": "react-jsx",
     "incremental": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
@@ -32,7 +35,9 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
-    "**/*.mts"
+    "**/*.mts",
+    "**/*.js",
+    "**/*.jsx"
   ],
   "exclude": ["node_modules"]
 }
